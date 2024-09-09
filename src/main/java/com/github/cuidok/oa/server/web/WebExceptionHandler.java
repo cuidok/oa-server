@@ -1,5 +1,6 @@
 package com.github.cuidok.oa.server.web;
 
+import com.github.cuidok.oa.server.user.exception.IllegalTokenException;
 import com.github.cuidok.oa.server.web.model.BasicResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -20,5 +21,16 @@ public class WebExceptionHandler {
 
         // Return the error information and error code to the user
         return BasicResponse.fail("400", e.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @ExceptionHandler(IllegalTokenException.class)
+    public BasicResponse<String> handleIllegalTokenException(IllegalTokenException e) {
+
+        // Log the error information with error level
+        log.info("Illegal token: {}", e.getMessage());
+
+        // Return the error information and error code to the user
+        return BasicResponse.fail("400", e.getUserMessage());
     }
 }

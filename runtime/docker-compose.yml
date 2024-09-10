@@ -1,0 +1,10 @@
+version: '3'
+services:
+  oa-mysql:
+    image: mysql:8.0.38
+    environment:
+      - MYSQL_ROOT_PASSWORD=Mysql@123456
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql

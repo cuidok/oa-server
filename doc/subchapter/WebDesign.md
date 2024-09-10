@@ -16,4 +16,4 @@ This function's main task is to handle the `IllegalArgumentException`, the funct
 This function's main task is to handle the `IllegalTokenException`, the function follows the steps below:
 
 1. Use log level to log the error message.
-2. Return the `401` error code and user message to the client.
+2. Return the `400` error code and user message to the client.

@@ -60,3 +60,37 @@ The function queries the user token, the function follows the steps below:
 If the user token does not exist, the function will return `Optional.empty()`.
 
 If the user token is expired, the function will return `Optional.empty()`.
+
+## Register
+
+The system provides the function to register a new user.
+
+The registering steps of the user are as follows:
+
+1. Accept the register parameters.
+2. Check input parameters.
+3. Check the password whether meets the requirements.
+4. Check the email whether meets the requirements.
+5. Check the username whether exists.
+6. Check the email whether exists.
+7. User spring-security-crypto to encrypt the password.
+8. Save the user information into the user table.
+
+The email must follow the email format.
+
+The password must be at least 8 characters long and contain at least one letter and one number.
+
+## Login
+
+The system provides the function to login.
+
+The login steps of the user are as follows:
+
+1. Accept the login parameters.
+2. Check input parameters.
+3. Query the user information by username
+4. Check the login verification code.
+5. Check the username and password.
+6. Generate the user token.
+7. Save the user token into the user token container.
+8. Return the user token.

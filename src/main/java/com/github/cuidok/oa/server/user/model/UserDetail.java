@@ -7,4 +7,10 @@ public class UserDetail {
 
     private Integer id;
 
+    public UserDetail() {
+    }
+
+    public UserDetail(Integer id) {
+        this.id = id;
+    }
 }

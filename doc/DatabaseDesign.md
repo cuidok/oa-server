@@ -19,6 +19,5 @@ CREATE DATABASE `oa` DEFAULT CHARACTER SET UTF8MB4 COLLATE utf8mb4_general_ci;
 | 1      | id        | int       | 11     | 0       | N          | Y           |               | User id          |
 | 2      | username  | varchar   | 20     | 0       | N          | N           |               | User name        |
 | 3      | nick_name | varchar   | 20     | 0       | Y          | N           |               | Nickname         |
-| 4      | password  | varchar   | 32     | 0       | N          | N           |               | Login password   |
-| 5      | salt      | varchar   | 18     | 0       | N          | N           |               | Salt of password |
-| 6      | email     | varchar   | 50     | 0       | Y          | N           |               | Email            |
+| 4      | password  | varchar   | 100    | 0       | N          | N           |               | Login password   |
+| 5      | email     | varchar   | 50     | 0       | Y          | N           |               | Email            |

@@ -7,8 +7,7 @@ CREATE TABLE `user`
     `id`        INT(11)     NOT NULL AUTO_INCREMENT COMMENT 'User id',
     `username`  VARCHAR(20) NOT NULL COMMENT 'User name',
     `nick_name` VARCHAR(20) DEFAULT NULL COMMENT 'Nickname',
-    `password`  VARCHAR(32) NOT NULL COMMENT 'Login password',
-    `salt`      VARCHAR(18) NOT NULL COMMENT 'Salt of password',
+    `password`  VARCHAR(100) NOT NULL COMMENT 'Login password',
     `email`     VARCHAR(50) DEFAULT NULL COMMENT 'Email',
     PRIMARY KEY (`id`),
     UNIQUE KEY `idx_username` (`username`)

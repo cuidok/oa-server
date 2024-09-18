@@ -1,7 +1,6 @@
 package com.github.cuidok.oa.server.user.model;
 
 import lombok.Data;
-import org.springframework.stereotype.Service;
 
 @Data
 public class UserLoginParam {

@@ -25,7 +25,6 @@ class UserMapperTest {
         user.setUsername("test_" + System.currentTimeMillis());
         user.setNickName("test_nickname");
         user.setPassword("test_password");
-        user.setSalt("test_salt");
         user.setEmail("test_email");
 
         userInsertMapper.insert(user);
@@ -35,7 +34,6 @@ class UserMapperTest {
         assertEquals(user.getUsername(), userFromDatabase.getUsername());
         assertEquals(user.getNickName(), userFromDatabase.getNickName());
         assertEquals(user.getPassword(), userFromDatabase.getPassword());
-        assertEquals(user.getSalt(), userFromDatabase.getSalt());
         assertEquals(user.getEmail(), userFromDatabase.getEmail());
 
         userDeleteMapper.deleteUserById(userFromDatabase.getId());

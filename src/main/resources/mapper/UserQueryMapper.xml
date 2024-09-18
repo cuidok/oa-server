@@ -10,7 +10,6 @@
             username,
             nick_name AS nickName,
             password,
-            salt,
             email
         FROM
             `user`
@@ -24,11 +23,24 @@
             username,
             nick_name AS nickName,
             password,
-            salt,
             email
         FROM
             `user`
         WHERE
             username = #{username}
     </select>
+
+    <select id="selectUserByEmail" resultType="com.github.cuidok.oa.server.user.model.User">
+        SELECT
+            id,
+            username,
+            nick_name AS nickName,
+            password,
+            email
+        FROM
+            `user`
+        WHERE
+            email = #{email}
+    </select>
+
 </mapper>

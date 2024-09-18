@@ -5,8 +5,8 @@
 <mapper namespace="com.github.cuidok.oa.server.user.UserInsertMapper">
 
     <insert id="insert" parameterType="com.github.cuidok.oa.server.user.model.User">
-        INSERT INTO `user` (`username`, `nick_name`, `password`, `salt`, `email`)
-        VALUES (#{username}, #{nickName}, #{password}, #{salt}, #{email})
+        INSERT INTO `user` (`username`, `nick_name`, `password`, `email`)
+        VALUES (#{username}, #{nickName}, #{password}, #{email})
     </insert>
 
 </mapper>

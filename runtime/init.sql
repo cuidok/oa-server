@@ -21,7 +21,7 @@ CREATE TABLE `task`
     `user_id`     INT(11)     NOT NULL COMMENT 'User id',
     `title`       VARCHAR(50) NOT NULL COMMENT 'Task title',
     `content`     TEXT        NOT NULL COMMENT 'Task content',
-    `status`      INT(11)     NOT NULL COMMENT 'Task status',
+    `status`      varchar(20)     NOT NULL COMMENT 'Task status',
     `start_time`  DATETIME    NOT NULL COMMENT 'The planned start time of task',
     `end_time`    DATETIME    NOT NULL COMMENT 'The end time of task',
     `create_time` DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'The create time of task',

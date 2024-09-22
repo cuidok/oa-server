@@ -30,7 +30,7 @@ CREATE DATABASE `oa` DEFAULT CHARACTER SET UTF8MB4 COLLATE utf8mb4_general_ci;
 | 2      | user_id     | int       | 11     | 0       | N          | N           |               | User id                        |
 | 3      | title       | varchar   | 50     | 0       | N          | N           |               | Task title                     |
 | 4      | content     | text      |        |         | N          | N           |               | Task content                   |
-| 5      | status      | int       | 11     | 0       | N          | N           |               | Task status                    |
+| 5      | status      | varchar   | 20     | 0       | N          | N           |               | Task status                    |
 | 6      | start_time  | datetime  |        |         | N          | N           |               | The planned start time of task |
 | 7      | end_time    | datetime  |        |         | N          | N           |               | The end time of task           |
 | 6      | create_time | datetime  |        |         | N          | N           |               | The create time of task        |

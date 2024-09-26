@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.cuidok.oa.server.task.TaskQueryMapper">
+
+    <select id="selectTaskById" resultType="com.github.cuidok.oa.server.task.model.Task">
+        SELECT
+            id,
+            user_id AS userId,
+            title,
+            content,
+            status,
+            start_time AS startTime,
+            end_time AS endTime,
+            complete_time AS completeTime,
+            create_time AS createTime,
+            update_time AS updateTime
+        FROM
+            task
+        WHERE
+            id = #{id}
+    </select>
+
+</mapper>

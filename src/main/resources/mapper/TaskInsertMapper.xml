@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.cuidok.oa.server.task.TaskInsertMapper">
+
+    <insert id="insertTask" parameterType="com.github.cuidok.oa.server.task.model.Task" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `task` (`user_id`,
+                            `title`,
+                            `content`,
+                            `status`,
+                            `start_time`,
+                            `end_time`,
+                            `complete_time`,
+                            `create_time`,
+                            `update_time`)
+        VALUES (#{userId},
+                #{title},
+                #{content},
+                #{status},
+                #{startTime, jdbcType=TIMESTAMP},
+                #{endTime, jdbcType=TIMESTAMP},
+                #{completeTime, jdbcType=TIMESTAMP},
+                #{createTime, jdbcType=TIMESTAMP},
+                #{updateTime, jdbcType=TIMESTAMP})
+    </insert>
+
+</mapper>

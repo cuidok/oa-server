@@ -1,8 +1,8 @@
-package com.github.cuidok.oa.server.task;
+package com.github.cuidok.oa.server.task.model;
 
 public enum TaskStatus {
     NotStarted,  // The task is not started. This is the default status.
     InProgress,  // The task is in progress.
     Completed,   // The task is completed.
-    Cancelled    // The task is cancelled.
+    Cancelled;    // The task is cancelled.
 }

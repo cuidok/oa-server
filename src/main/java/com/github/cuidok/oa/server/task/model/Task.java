@@ -1,4 +1,4 @@
-package com.github.cuidok.oa.server.task;
+package com.github.cuidok.oa.server.task.model;
 
 import lombok.Data;
 import java.time.LocalDateTime;
@@ -19,6 +19,8 @@ public class Task {
     private LocalDateTime startTime;
 
     private LocalDateTime endTime;
+
+    private LocalDateTime completeTime;
 
     private LocalDateTime createTime;
 

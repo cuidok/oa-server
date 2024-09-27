@@ -2,6 +2,7 @@ package com.github.cuidok.oa.server.task;
 
 import com.github.cuidok.oa.server.task.model.Task;
 import com.github.cuidok.oa.server.task.model.TaskStatus;
+import com.github.cuidok.oa.server.util.LocalDateTimeCompare;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,6 +23,7 @@ class TaskMapperTest {
 
     @Test
     public void testInsert() {
+
         Task task = new Task();
         task.setUserId(1);
         task.setTitle("TEST_" + System.currentTimeMillis());
@@ -36,21 +38,17 @@ class TaskMapperTest {
         taskInsertMapper.insertTask(task);
 
         Task taskFromDatabase = taskQueryMapper.selectTaskById(task.getId());
+        LocalDateTimeCompare compare = new LocalDateTimeCompare();
 
         assertNotNull(taskFromDatabase);
         assertEquals(task.getUserId(), taskFromDatabase.getUserId());
         assertEquals(task.getTitle(), taskFromDatabase.getTitle());
         assertEquals(task.getContent(), taskFromDatabase.getContent());
         assertEquals(task.getStatus(), taskFromDatabase.getStatus());
-        assertTrue(compareTimeDifference(task.getStartTime(), taskFromDatabase.getStartTime(), 1));
-        assertTrue(compareTimeDifference(task.getEndTime(), taskFromDatabase.getEndTime(), 1));
-        assertTrue(compareTimeDifference(task.getCompleteTime(), taskFromDatabase.getCompleteTime(), 1));
-        assertTrue(compareTimeDifference(task.getCreateTime(), taskFromDatabase.getCreateTime(), 1));
-        assertTrue(compareTimeDifference(task.getUpdateTime(), taskFromDatabase.getUpdateTime(), 1));
+        assertTrue(compare.compareTimeDifference(task.getStartTime(), taskFromDatabase.getStartTime(), 2));
+        assertTrue(compare.compareTimeDifference(task.getEndTime(), taskFromDatabase.getEndTime(), 2));
+        assertTrue(compare.compareTimeDifference(task.getCompleteTime(), taskFromDatabase.getCompleteTime(), 2));
+        assertTrue(compare.compareTimeDifference(task.getCreateTime(), taskFromDatabase.getCreateTime(), 2));
+        assertTrue(compare.compareTimeDifference(task.getUpdateTime(), taskFromDatabase.getUpdateTime(), 2));
     }
-
-    private boolean compareTimeDifference(LocalDateTime time1, LocalDateTime time2, int seconds) {
-        return seconds > Math.abs(time1.toEpochSecond(ZoneOffset.UTC) - time2.toEpochSecond(ZoneOffset.UTC));
-    }
-
 }

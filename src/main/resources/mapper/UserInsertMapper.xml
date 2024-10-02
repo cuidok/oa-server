@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.github.cuidok.oa.server.user.UserInsertMapper">
+<mapper namespace="com.github.cuidok.oa.server.user.mapper.UserInsertMapper">
 
     <insert id="insert" parameterType="com.github.cuidok.oa.server.user.model.User">
         INSERT INTO `user` (`username`, `nick_name`, `password`, `email`)

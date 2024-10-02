@@ -1,5 +1,8 @@
 package com.github.cuidok.oa.server.user;
 
+import com.github.cuidok.oa.server.user.mapper.UserDeleteMapper;
+import com.github.cuidok.oa.server.user.mapper.UserInsertMapper;
+import com.github.cuidok.oa.server.user.mapper.UserQueryMapper;
 import com.github.cuidok.oa.server.user.model.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

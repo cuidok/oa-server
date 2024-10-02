@@ -1,4 +1,4 @@
-package com.github.cuidok.oa.server.task;
+package com.github.cuidok.oa.server.task.mapper;
 
 import com.github.cuidok.oa.server.task.model.Task;
 import org.apache.ibatis.annotations.Mapper;

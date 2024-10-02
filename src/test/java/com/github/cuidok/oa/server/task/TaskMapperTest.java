@@ -1,14 +1,13 @@
 package com.github.cuidok.oa.server.task;
 
+import com.github.cuidok.oa.server.task.mapper.TaskDeleteMapper;
+import com.github.cuidok.oa.server.task.mapper.TaskInsertMapper;
+import com.github.cuidok.oa.server.task.mapper.TaskQueryMapper;
 import com.github.cuidok.oa.server.task.model.Task;
-import com.github.cuidok.oa.server.task.model.TaskStatus;
 import com.github.cuidok.oa.server.util.LocalDateTimeCompare;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,19 +20,13 @@ class TaskMapperTest {
     @Autowired
     private TaskQueryMapper taskQueryMapper;
 
+    @Autowired
+    private TaskDeleteMapper taskDeleteMapper;
+
     @Test
     public void testInsert() {
 
-        Task task = new Task();
-        task.setUserId(1);
-        task.setTitle("TEST_" + System.currentTimeMillis());
-        task.setContent("TEST_CONTENT");
-        task.setStatus(TaskStatus.NotStarted);
-        task.setStartTime(LocalDateTime.now());
-        task.setEndTime(LocalDateTime.now().plusDays(1));
-        task.setCompleteTime(LocalDateTime.now().plusDays(2));
-        task.setCreateTime(LocalDateTime.now());
-        task.setUpdateTime(LocalDateTime.now());
+        Task task = TaskBuilder.buildComplete();
 
         taskInsertMapper.insertTask(task);
 
@@ -50,5 +43,21 @@ class TaskMapperTest {
         assertTrue(compare.compareTimeDifference(task.getCompleteTime(), taskFromDatabase.getCompleteTime(), 2));
         assertTrue(compare.compareTimeDifference(task.getCreateTime(), taskFromDatabase.getCreateTime(), 2));
         assertTrue(compare.compareTimeDifference(task.getUpdateTime(), taskFromDatabase.getUpdateTime(), 2));
+    }
+
+    @Test
+    public void testDelete() {
+
+        Task task = TaskBuilder.buildComplete();
+
+        taskInsertMapper.insertTask(task);
+
+        Task taskFromDatabase = taskQueryMapper.selectTaskById(task.getId());
+        assertNotNull(taskFromDatabase);
+
+        taskDeleteMapper.deleteTask(task.getId());
+
+        Task taskFromDatabaseAfterDelete = taskQueryMapper.selectTaskById(task.getId());
+        assertNull(taskFromDatabaseAfterDelete);
     }
 }

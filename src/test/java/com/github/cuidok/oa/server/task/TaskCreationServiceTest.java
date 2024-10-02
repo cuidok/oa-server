@@ -1,6 +1,8 @@
 package com.github.cuidok.oa.server.task;
 
+import com.github.cuidok.oa.server.task.mapper.TaskQueryMapper;
 import com.github.cuidok.oa.server.task.model.Task;
+import com.github.cuidok.oa.server.task.model.TaskCreateParam;
 import com.github.cuidok.oa.server.task.model.TaskStatus;
 import com.github.cuidok.oa.server.util.LocalDateTimeCompare;
 import org.junit.jupiter.api.Test;
@@ -22,17 +24,19 @@ class TaskCreationServiceTest {
     void createTask() {
 
         Integer userId = 1;
-        String title = "test_title";
-        String content = "test_content";
+        TaskCreateParam param = new TaskCreateParam();
+        param.setTitle("test_title");
+        param.setContent("test_content");
 
-        Task task = taskCreationService.createTask(userId, title, content, null, null);
+
+        Task task = taskCreationService.createTask(userId, param);
 
         Task taskFromDb = taskQueryMapper.selectTaskById(task.getId());
         LocalDateTimeCompare compare = new LocalDateTimeCompare();
         assertNotNull(taskFromDb);
         assertEquals(userId, taskFromDb.getUserId());
-        assertEquals(title, taskFromDb.getTitle());
-        assertEquals(content, taskFromDb.getContent());
+        assertEquals(param.getTitle(), taskFromDb.getTitle());
+        assertEquals(param.getContent(), taskFromDb.getContent());
         assertEquals(TaskStatus.NotStarted, taskFromDb.getStatus());
         assertNotNull(taskFromDb.getStartTime());
         assertNotNull(taskFromDb.getEndTime());

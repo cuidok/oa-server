@@ -1,6 +1,8 @@
 package com.github.cuidok.oa.server.task;
 
+import com.github.cuidok.oa.server.task.mapper.TaskInsertMapper;
 import com.github.cuidok.oa.server.task.model.Task;
+import com.github.cuidok.oa.server.task.model.TaskCreateParam;
 import com.github.cuidok.oa.server.task.model.TaskStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,12 @@ public class TaskCreationService {
         this.taskInsertMapper = taskInsertMapper;
     }
 
-    public Task createTask(Integer userId, String title, String content, LocalDateTime startTime, LocalDateTime endTime) {
+    public Task createTask(Integer userId, TaskCreateParam taskCreateParam) {
+
+        String title = taskCreateParam.getTitle();
+        String content = taskCreateParam.getContent();
+        LocalDateTime startTime = taskCreateParam.getStartTime();
+        LocalDateTime endTime = taskCreateParam.getEndTime();
 
         // Check input parameters
         if (userId == null || title == null || content == null) {

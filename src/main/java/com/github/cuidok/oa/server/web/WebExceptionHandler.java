@@ -1,5 +1,6 @@
 package com.github.cuidok.oa.server.web;
 
+import com.github.cuidok.oa.server.exception.NoPermissionException;
 import com.github.cuidok.oa.server.user.exception.IllegalTokenException;
 import com.github.cuidok.oa.server.web.model.BasicResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -32,5 +33,13 @@ public class WebExceptionHandler {
 
         // Return the error information and error code to the user
         return BasicResponse.fail("400", e.getUserMessage());
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @ExceptionHandler(NoPermissionException.class)
+    public BasicResponse<String> handleNoPermissionException(NoPermissionException e) {
+
+        // Return the error information and error code to the user
+        return BasicResponse.fail("403", e.getMessage());
     }
 }

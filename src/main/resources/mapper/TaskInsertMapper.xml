@@ -5,15 +5,15 @@
 <mapper namespace="com.github.cuidok.oa.server.task.mapper.TaskInsertMapper">
 
     <insert id="insertTask" parameterType="com.github.cuidok.oa.server.task.model.Task" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO `task` (`user_id`,
-                            `title`,
-                            `content`,
-                            `status`,
-                            `start_time`,
-                            `end_time`,
-                            `complete_time`,
-                            `create_time`,
-                            `update_time`)
+        INSERT INTO "task" (user_id,
+                            title,
+                            content,
+                            status,
+                            start_time,
+                            end_time,
+                            complete_time,
+                            create_time,
+                            update_time)
         VALUES (#{userId},
                 #{title},
                 #{content},

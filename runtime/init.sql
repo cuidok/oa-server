@@ -1,35 +1,47 @@
-CREATE DATABASE `oa` DEFAULT CHARACTER SET UTF8MB4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE oa WITH ENCODING 'UTF8' LC_COLLATE='en_US.utf8' LC_CTYPE='en_US.utf8' TEMPLATE=template0;
 
-use `oa`;
+\c oa
 
-CREATE TABLE `user`
+CREATE TABLE "user"
 (
-    `id`        INT(11)      NOT NULL AUTO_INCREMENT COMMENT 'User id',
-    `username`  VARCHAR(20)  NOT NULL COMMENT 'User name',
-    `nick_name` VARCHAR(20) DEFAULT NULL COMMENT 'Nickname',
-    `password`  VARCHAR(100) NOT NULL COMMENT 'Login password',
-    `email`     VARCHAR(50) DEFAULT NULL COMMENT 'Email',
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `idx_username` (`username`)
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4
-  COLLATE = utf8mb4_general_ci COMMENT ='User management table';
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(20) NOT NULL UNIQUE,
+    nick_name VARCHAR(20),
+    password VARCHAR(100) NOT NULL,
+    email VARCHAR(50)
+);
 
-CREATE TABLE `task`
+COMMENT ON TABLE "user" IS 'User management table';
+COMMENT ON COLUMN "user".id IS 'User id';
+COMMENT ON COLUMN "user".username IS 'User name';
+COMMENT ON COLUMN "user".nick_name IS 'Nickname';
+COMMENT ON COLUMN "user".password IS 'Login password';
+COMMENT ON COLUMN "user".email IS 'Email';
+
+CREATE TABLE task
 (
-    `id`            INT(11)     NOT NULL AUTO_INCREMENT COMMENT 'Task id',
-    `user_id`       INT(11)     NOT NULL COMMENT 'User id',
-    `title`         VARCHAR(50) NOT NULL COMMENT 'Task title',
-    `content`       TEXT        NOT NULL COMMENT 'Task content',
-    `status`        VARCHAR(20) NOT NULL COMMENT 'Task status',
-    `start_time`    DATETIME    NOT NULL COMMENT 'The planned start time of task',
-    `end_time`      DATETIME    NOT NULL COMMENT 'The end time of task',
-    `complete_time` DATETIME             DEFAULT NULL COMMENT 'The complete time of task',
-    `create_time`   DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'The create time of task',
-    `update_time`   DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'The update time of task',
-    PRIMARY KEY (`id`),
-    INDEX `idx_user_id` (`user_id`)
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4
-  COLLATE = utf8mb4_general_ci
-    COMMENT ='Task table';
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    title VARCHAR(50) NOT NULL,
+    content TEXT NOT NULL,
+    status VARCHAR(20) NOT NULL,
+    start_time TIMESTAMP NOT NULL,
+    end_time TIMESTAMP NOT NULL,
+    complete_time TIMESTAMP,
+    create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+COMMENT ON TABLE task IS 'Task table';
+COMMENT ON COLUMN task.id IS 'Task id';
+COMMENT ON COLUMN task.user_id IS 'User id';
+COMMENT ON COLUMN task.title IS 'Task title';
+COMMENT ON COLUMN task.content IS 'Task content';
+COMMENT ON COLUMN task.status IS 'Task status';
+COMMENT ON COLUMN task.start_time IS 'The planned start time of task';
+COMMENT ON COLUMN task.end_time IS 'The end time of task';
+COMMENT ON COLUMN task.complete_time IS 'The complete time of task';
+COMMENT ON COLUMN task.create_time IS 'The create time of task';
+COMMENT ON COLUMN task.update_time IS 'The update time of task';
+
+CREATE INDEX idx_user_id ON task(user_id);

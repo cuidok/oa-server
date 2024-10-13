@@ -1,10 +1,10 @@
 version: '3'
 services:
-  oa-mysql:
-    image: mysql:8.0.38
-    environment:
-      - MYSQL_ROOT_PASSWORD=Mysql@123456
+  oa-postgresql:
+    image: bitnami/postgresql:16.4.0
     ports:
-      - "3306:3306"
+      - "5432:5432"
+    environment:
+      - POSTGRESQL_PASSWORD=Oa@123456
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql

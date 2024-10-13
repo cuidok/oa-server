@@ -17,7 +17,7 @@
             create_time AS createTime,
             update_time AS updateTime
         FROM
-            task
+            "task"
         WHERE
             id = #{id}
     </select>

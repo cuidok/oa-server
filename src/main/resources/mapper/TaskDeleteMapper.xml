@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.cuidok.oa.server.task.mapper.TaskDeleteMapper">
     <delete id="deleteTask" parameterType="int">
-        DELETE FROM `task`
+        DELETE FROM "task"
         WHERE id = #{taskId}
     </delete>
 </mapper>

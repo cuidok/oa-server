@@ -12,7 +12,7 @@
             password,
             email
         FROM
-            `user`
+            "user"
         WHERE
             id = #{id}
     </select>
@@ -25,7 +25,7 @@
             password,
             email
         FROM
-            `user`
+            "user"
         WHERE
             username = #{username}
     </select>
@@ -38,7 +38,7 @@
             password,
             email
         FROM
-            `user`
+            "user"
         WHERE
             email = #{email}
     </select>

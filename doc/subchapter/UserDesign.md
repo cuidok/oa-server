@@ -94,3 +94,15 @@ The login steps of the user are as follows:
 6. Generate the user token.
 7. Save the user token into the user token container.
 8. Return the user token.
+
+## Query the user info
+
+The system provides the function to query the user information using the user token.
+
+The query steps of the user are as follows:
+
+1. Accept the token.
+2. Check input parameters.
+3. Parse the token.
+4. Query the user information by user id.
+5. Return the user information.

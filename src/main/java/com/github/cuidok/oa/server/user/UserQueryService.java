@@ -1,6 +1,5 @@
 package com.github.cuidok.oa.server.user;
 
-import com.github.cuidok.oa.server.user.exception.IllegalTokenException;
 import com.github.cuidok.oa.server.user.mapper.UserQueryMapper;
 import com.github.cuidok.oa.server.user.model.User;
 import com.github.cuidok.oa.server.user.model.UserDetail;

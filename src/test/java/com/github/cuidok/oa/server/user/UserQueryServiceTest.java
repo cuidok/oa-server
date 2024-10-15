@@ -1,8 +1,6 @@
 package com.github.cuidok.oa.server.user;
 
 import com.github.cuidok.oa.server.encryptor.LoginVerificationKeyDecryptor;
-import com.github.cuidok.oa.server.user.mapper.UserInsertMapper;
-import com.github.cuidok.oa.server.user.model.User;
 import com.github.cuidok.oa.server.user.model.UserDetail;
 import com.github.cuidok.oa.server.user.model.UserInfo;
 import com.github.cuidok.oa.server.user.model.UserLoginParam;

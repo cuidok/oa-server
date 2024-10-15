@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserLoginService {
 
+    private final BCryptPasswordEncoder passwordEncoder;
+
     private final UserQueryMapper userQueryMapper;
 
     private final UserTokenContainer userTokenContainer;
@@ -20,6 +22,7 @@ public class UserLoginService {
     private final LoginVerificationCodeService loginVerificationCodeService;
 
     public UserLoginService(UserQueryMapper userQueryMapper, UserTokenContainer userTokenContainer, UserTokenGenerator userTokenGenerator, LoginVerificationCodeService loginVerificationCodeService) {
+        this.passwordEncoder = new BCryptPasswordEncoder();
         this.userQueryMapper = userQueryMapper;
         this.userTokenContainer = userTokenContainer;
         this.userTokenGenerator = userTokenGenerator;
@@ -50,7 +53,6 @@ public class UserLoginService {
         }
 
         // Check the username and password
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new IllegalArgumentException("Invalid username or password");
         }

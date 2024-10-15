@@ -5,21 +5,92 @@
 <mapper namespace="com.github.cuidok.oa.server.task.mapper.TaskQueryMapper">
 
     <select id="selectTaskById" resultType="com.github.cuidok.oa.server.task.model.Task">
+        SELECT id,
+               user_id       AS userId,
+               title,
+               content,
+               status,
+               start_time    AS startTime,
+               end_time      AS endTime,
+               complete_time AS completeTime,
+               create_time   AS createTime,
+               update_time   AS updateTime
+        FROM "task"
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectTasks" resultType="com.github.cuidok.oa.server.task.model.Task">
         SELECT
-            id,
-            user_id AS userId,
-            title,
-            content,
-            status,
-            start_time AS startTime,
-            end_time AS endTime,
-            complete_time AS completeTime,
-            create_time AS createTime,
-            update_time AS updateTime
+        id,
+        user_id AS userId,
+        title,
+        content,
+        status,
+        start_time AS startTime,
+        end_time AS endTime,
+        complete_time AS completeTime,
+        create_time AS createTime,
+        update_time AS updateTime
         FROM
-            "task"
+        "task"
         WHERE
-            id = #{id}
+        user_id = #{userId}
+        <if test="queryParam.taskStatus != null">
+            AND status = #{queryParam.taskStatus}
+        </if>
+        <if test="queryParam.createTimeFrom != null">
+            AND create_time &gt;= #{queryParam.createTimeFrom}
+        </if>
+        <if test="queryParam.createTimeTo != null">
+            AND create_time &lt;= #{queryParam.createTimeTo}
+        </if>
+        <if test="queryParam.startTimeFrom != null">
+            AND start_time &gt;= #{queryParam.startTimeFrom}
+        </if>
+        <if test="queryParam.startTimeTo != null">
+            AND start_time &lt;= #{queryParam.startTimeTo}
+        </if>
+        <if test="queryParam.endTimeFrom != null">
+            AND end_time &gt;= #{queryParam.endTimeFrom}
+        </if>
+        <if test="queryParam.endTimeTo != null">
+            AND end_time &lt;= #{queryParam.endTimeTo}
+        </if>
+        <if test="queryParam.updateTimeFrom != null">
+            AND update_time &gt;= #{queryParam.updateTimeFrom}
+        </if>
+        <if test="queryParam.updateTimeTo != null">
+            AND update_time &lt;= #{queryParam.updateTimeTo}
+        </if>
+        <if test="queryParam.title != null and queryParam.title != ''">
+            AND title LIKE CONCAT('%', #{queryParam.title}, '%')
+        </if>
+        <if test="queryParam.content != null and queryParam.content != ''">
+            AND content LIKE CONCAT('%', #{queryParam.content}, '%')
+        </if>
+        ORDER BY
+        <choose>
+            <when test="sortParam.field != null">
+                ${sortParam.field}
+            </when>
+            <otherwise>
+                create_time
+            </otherwise>
+        </choose>
+        <choose>
+            <when test="sortParam.type.toString() == 'ASC'">
+                ASC
+            </when>
+            <otherwise>
+                DESC
+            </otherwise>
+        </choose>
+        <if test="queryParam.pageSize != null">
+            LIMIT #{queryParam.pageSize}
+        </if>
+        <if test="queryParam.pageNum != null">
+            OFFSET #{queryParam.pageSize} * (#{queryParam.pageNum} - 1)
+        </if>
     </select>
 
 </mapper>
